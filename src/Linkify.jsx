@@ -14,7 +14,8 @@ class Linkify extends React.Component {
     component: PropTypes.any,
     properties: PropTypes.object,
     urlRegex: PropTypes.object,
-    emailRegex: PropTypes.object
+    emailRegex: PropTypes.object,
+    linkTransform: PropTypes.func
   }
 
   static defaultProps = {
@@ -52,6 +53,9 @@ class Linkify extends React.Component {
         let val = this.props.properties[key];
         if (val === Linkify.MATCH) {
           val = match.url;
+        }
+        if (key === 'href' && this.props.linkTransform) {
+          val = this.props.linkTransform(match.url)
         }
 
         props[key] = val;

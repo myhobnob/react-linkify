@@ -84,6 +84,9 @@ var Linkify = function (_React$Component) {
           if (val === Linkify.MATCH) {
             val = match.url;
           }
+          if (key === 'href' && _this2.props.linkTransform) {
+            val = _this2.props.linkTransform(match.url);
+          }
 
           props[key] = val;
         }
@@ -139,7 +142,8 @@ Linkify.propTypes = {
   component: _propTypes2.default.any,
   properties: _propTypes2.default.object,
   urlRegex: _propTypes2.default.object,
-  emailRegex: _propTypes2.default.object
+  emailRegex: _propTypes2.default.object,
+  linkTransform: _propTypes2.default.func
 };
 Linkify.defaultProps = {
   className: 'Linkify',
